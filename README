@@ -1,0 +1,123 @@
+Quantum Blockchain v1
+Overview
+Quantum Blockchain v1 is a revolutionary blockchain implementation that integrates quantum computing principles to achieve unparalleled security and efficiency. By leveraging quantum-generated signatures, random numbers, and algorithms, this blockchain is designed to be resilient against quantum attacks, making it the world's most secure blockchain technology. This project is now open source, available to the community for exploration and enhancement, with options for commercial licensing.
+
+Features
+Quantum-Resilient Security: Utilizing quantum principles such as superposition and entanglement to secure blockchain data, making it resistant to quantum computing attacks.
+Smart Contract Deployment and Execution: Seamlessly deploy and execute smart contracts with integrated support for Solidity.
+Quantum State Management: Includes endpoints to retrieve and manage quantum state data.
+Blockchain Validation: Built-in functionality to validate the blockchain, ensuring data integrity and security.
+Customizable Quantum Signature: Provides an API to create quantum signatures that are secure and unpredictable.
+
+
+
+Installation
+Prerequisites
+Ensure that you have Python installed, along with the necessary dependencies. Install them by running:
+
+create and activate Python env
+
+
+bash
+Copy code
+pip install -r requirements.txt
+Requirements File: The requirements.txt file includes necessary libraries such as  Requests, FastAPI, uvicorn, pydantic, cirq, and others to support blockchain and quantum functionalities.
+
+or install then one by one 
+
+
+
+Running the Blockchain
+Start the Server: To start the blockchain server, run the following command in your terminal: python q_main
+
+Terminal interaction result:
+INFO:     Started server process [13556]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58893 - "POST /smart_contract/deploy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58942 - "GET /chain HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59153 - "POST /smart_contract/deploy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59226 - "GET /quantum_state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59382 - "GET /chain HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59383 - "GET /validate HTTP/1.1" 200 OK
+
+
+bash
+Copy code
+uvicorn q_main:app --host 0.0.0.0 --port 8000
+
+
+Endpoints:
+
+Retrieve Blockchain: Get the current state of the blockchain.
+bash
+Copy code
+curl -X GET http://localhost:8000/chain
+Validate Blockchain: Check if the blockchain is valid.
+bash
+Copy code
+curl -X GET http://localhost:8000/validate
+Retrieve Quantum State: Fetch the current quantum state data.
+bash
+Copy code
+curl -X GET http://localhost:8000/quantum_state
+
+
+Deploy 2 Smart Contracts: Deploy a new smart contract using a Solidity code snippet.
+bash
+
+1 Copy code and past in command prompt:
+
+curl -X POST http://localhost:8000/smart_contract/deploy -H "Content-Type: application/json" -u oneness:666 -d "{\"contract_id\": \"HelloWorld\", \"contract_code\": \"pragma solidity ^0.8.0; contract HelloWorld { string public message; constructor() { message = \\\"Hello, World!\\\"; } function setMessage(string memory newMessage) public { message = newMessage; } function getMessage() public view returns (string memory) { return message; } }\"}"
+
+
+2 Copy code and past in command prompt:
+
+curl -X POST http://localhost:8000/smart_contract/deploy ^
+-H "Content-Type: application/json" ^
+-d "{\"contract_id\": \"machine\", \"contract_code\": \"pragma solidity ^0.8.0; contract machine { string public message; constructor() { message = \\\"Hello, World!\\\"; } function setMessage(string memory newMessage) public { message = newMessage; } function getMessage() public view returns (string memory) { return message; } }\"}"
+
+
+
+Get list of smart contract 
+enter this url in your local browser:  http://localhost:8000/smart_contracts
+
+Results:
+{"smart_contracts":["HelloWorld","machine"]}
+
+
+
+
+
+Execute a Smart Contract: Execute a function within a deployed smart contract.
+bash
+
+Copy code
+
+curl -X POST http://localhost:8000/smart_contract/execute -H "Content-Type: application/json" -d "{\"contract_id\": \"HelloWorld\", \"args\": [\"new message\"]}"
+
+
+
+
+copy this in you local browser: http://localhost:8000/chain
+
+Results and Output
+Blockchain Example
+json
+Copy code
+{"chain":[{"index":1,"timestamp":"2024-09-01 21:05:45.010746","data":"genesis block","proof":100,"previous_hash":"0","quantum_signature":"0100000011001010000111110011011000001010111011000000110111001100000101000111001000001100100101101100110001010010100000111101011010101000110001001110000110010111100111010011001011001010101110111110111101101010111101011110010010100111110001110110001000110100"}],"length":1}
+
+Smart Contract Deployment Example
+json
+Copy code
+{"message":"Smart contract 'HelloWorld' deployed successfully."}
+Quantum State Example
+json
+Copy code
+{"quantum_state":["0.03125+0.0j","0.03125+0.0j",...]}
+Why Quantum Blockchain v1 is the World's Most Secure Blockchain
+Quantum Blockchain v1 incorporates quantum cryptography, which is inherently secure against the computational capabilities of classical and quantum computers. The use of quantum-generated signatures and encryption ensures data integrity and confidentiality beyond what is possible with current blockchain technologies.
+
+Impact of Quantum Blockchain Technology
+By integrating quantum computing with blockchain, this technology sets a new standard for security in decentralized networks. Quantum Blockchain v1 is open source, encouraging innovation and development within the community, and available for commercial licensing to leverage its groundbreaking features for enterprise applications.
